@@ -8,6 +8,17 @@ import { environment } from '../../environments/environment';
 // Defina a URL da API como uma constante
 const LOGIN_ENDPOINT = '/api/auth/login';
 
+function decodeToken(token: string): any {
+  try {
+    const payloadBase64 = token.split('.')[1];
+    const payloadJson = atob(payloadBase64);
+    return JSON.parse(payloadJson);
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return null;
+  }
+}
+
 @Component({
   selector: 'app-login',
   standalone: false,
@@ -39,6 +50,13 @@ export class LoginComponent implements OnInit {
             const token = response.data.accessToken; // Verifique se o token está aqui
             if (token) {
               localStorage.setItem('token', token);
+              console.log('Token JWT:', token); // Adicione esta linha
+
+              const decodedToken = decodeToken(token);
+              if (decodedToken) {
+                console.log('Decoded Token Payload:', decodedToken); // Exibe o payload decodificado
+              }
+
               this.router.navigate(['/dashboard']); // Navegação para o dashboard
               this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
             } else {
