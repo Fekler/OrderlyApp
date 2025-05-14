@@ -34,10 +34,10 @@
                 <td>{{ order.paymentMethod }}</td>
                 <td>{{ order.status }}</td>
                 <td *ngIf="canManageOrder()">
-                    <button *ngIf="order.status !== 'Approved'" (click)="updateOrderStatus(order.uuid, 'Approved')">
+                    <button *ngIf="order.status !== 'Approved'" (click)="updateOrderStatus(order.uuid, '1')">
                         Aprovar
                     </button>
-                    <button *ngIf="order.status !== 'Cancelled'" (click)="updateOrderStatus(order.uuid, 'Cancelled')">
+                    <button *ngIf="order.status !== 'Cancelled'" (click)="updateOrderStatus(order.uuid, '2')">
                         Cancelar
                     </button>
                 </td>

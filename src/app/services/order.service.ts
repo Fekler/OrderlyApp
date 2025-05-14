@@ -58,7 +58,7 @@ export class OrderService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.post<ApiResponse<any>>(
-      `${this.apiUrl}/api/v1/manager-order?orderUuid=${orderUuid}&status=${status}`,
+      `${this.apiUrl}/manager-order?orderUuid=${orderUuid}&status=${status}`,
       body,
       { headers }
     );

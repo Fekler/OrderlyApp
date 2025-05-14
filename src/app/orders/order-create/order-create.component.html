@@ -46,12 +46,18 @@
         <div formArrayName="orderItems">
             <div *ngFor="let i of orderItems.controls; let index = index" [formGroupName]="index">
                 <div>
-                    <label for="productId_{{index}}">Produto:</label> <select id="productId_{{index}}" formControlName="productId" required (change)="calculateTotalAmount()">
+                    <label for="productId_{{index}}">Produto:</label>
+                    <select id="productId_{{index}}" formControlName="productId" required>
                         <option value="" disabled>Selecione um produto</option>
-                        <option *ngFor="let product of products" [value]="product.uuid">{{ product.name }}</option>
+                        <option *ngFor="let product of products"
+                                [value]="product.uuid"
+                                [disabled]="isProductSelectedElsewhere(product.uuid, index)"> {{ product.name }} (Estoque: {{product.quantity}}) </option>
                     </select>
                     <div *ngIf="i.get('productId')?.invalid && (i.get('productId')?.dirty || i.get('productId')?.touched)">
                         <div *ngIf="i.get('productId')?.errors?.['required']">O produto é obrigatório.</div>
+                        <div *ngIf="i.get('productId')?.errors?.['duplicateProduct']" style="color: red;">
+                            Este produto já foi adicionado ao pedido.
+                        </div>
                     </div>
                 </div>
 
@@ -62,9 +68,18 @@
                 </div>
 
                 <div>
-                    <label for="quantity_{{index}}">Quantidade:</label> <input type="number" id="quantity_{{index}}" formControlName="quantity" min="1" required (input)="calculateTotalAmount()"> <div *ngIf="i.get('quantity')?.invalid && (i.get('quantity')?.dirty || i.get('quantity')?.touched)">
+                    <label for="quantity_{{index}}">Quantidade:</label>
+                    <input type="number"
+                           id="quantity_{{index}}"
+                           formControlName="quantity"
+                           min="1"
+                           [max]="getProductStock(i.get('productId')?.value) ?? 9999" required
+                           (input)="calculateTotalAmount()"> <div *ngIf="i.get('quantity')?.invalid && (i.get('quantity')?.dirty || i.get('quantity')?.touched)">
                         <div *ngIf="i.get('quantity')?.errors?.['required']">A quantidade é obrigatória.</div>
                         <div *ngIf="i.get('quantity')?.errors?.['min']">A quantidade deve ser maior que zero.</div>
+                        <div *ngIf="i.get('quantity')?.errors?.['maxStockExceeded']" style="color: red;">
+                            Quantidade excede o estoque disponível (Máx: {{ i.get('quantity')?.errors?.['maxStockExceeded'].requiredMax }}).
+                        </div>
                     </div>
                 </div>
 
