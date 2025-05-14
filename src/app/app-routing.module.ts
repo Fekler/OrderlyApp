@@ -12,7 +12,9 @@ import { StockComponent } from './stock/stock.component';
 import { UsersComponent } from './users/users.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { ReportsComponent } from './reports/reports.component';
-import { VendedorGuard } from './guards/vendedor.guard'; // Importe o guard do vendedor
+import { VendedorGuard } from './guards/vendedor.guard';
+import { ClientGuard } from './guards/client.guard'; // Importe o guard do cliente
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,8 +33,10 @@ const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' }
     ]
   },
+  { path: 'orders/create', component: OrderCreateComponent, canActivate: [ClientGuard] },
+  { path: 'client/orders', component: OrderListComponent, canActivate: [ClientGuard] }, 
   { path: 'order-list', component: OrderListComponent, canActivate: [VendedorGuard] }, 
-  { path: 'stock', component: StockComponent, canActivate: [VendedorGuard] }, // Protege a rota de estoque
+  { path: 'stock', component: StockComponent, canActivate: [VendedorGuard] }, 
   { path: 'users', component: UsersComponent },
   { path: 'users/create', component: UserCreateComponent },
   { path: 'reports', component: ReportsComponent },

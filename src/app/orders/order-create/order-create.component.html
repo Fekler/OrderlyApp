@@ -1,1 +1,61 @@
-<p>order-create works!</p>
+<div class="order-create-container">
+    <h2>Novo Pedido</h2>
+
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="shippingAddress">Endereço de Entrega:</label>
+            <input type="text" id="shippingAddress" formControlName="shippingAddress" required>
+            <div *ngIf="orderForm.controls['shippingAddress'].invalid && (orderForm.controls['shippingAddress'].dirty || orderForm.controls['shippingAddress'].touched)">
+                <div *ngIf="orderForm.controls['shippingAddress'].errors?.['required']">Endereço de entrega é obrigatório.</div>
+                <div *ngIf="orderForm.controls['shippingAddress'].errors?.['maxlength']">O endereço não pode exceder 255 caracteres.</div>
+            </div>
+        </div>
+
+        <div>
+            <label for="billingAddress">Endereço de Cobrança:</label>
+            <input type="text" id="billingAddress" formControlName="billingAddress" required>
+            <div *ngIf="orderForm.controls['billingAddress'].invalid && (orderForm.controls['billingAddress'].dirty || orderForm.controls['billingAddress'].touched)">
+                <div *ngIf="orderForm.controls['billingAddress'].errors?.['required']">Endereço de cobrança é obrigatório.</div>
+                <div *ngIf="orderForm.controls['billingAddress'].errors?.['maxlength']">O endereço não pode exceder 255 caracteres.</div>
+            </div>
+        </div>
+
+        <div>
+            <label for="paymentMethod">Método de Pagamento:</label>
+            <select id="paymentMethod" formControlName="paymentMethod" required>
+                <option value="" disabled>Selecione o método de pagamento</option>
+                <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+            </select>
+            <div *ngIf="orderForm.controls['paymentMethod'].invalid && (orderForm.controls['paymentMethod'].dirty || orderForm.controls['paymentMethod'].touched)">
+                <div *ngIf="orderForm.controls['paymentMethod'].errors?.['required']">O método de pagamento é obrigatório.</div>
+            </div>
+        </div>
+
+        <h3>Itens do Pedido:</h3>
+        <div formArrayName="orderItems">
+            <div *ngFor="let item of orderItems.controls; let i = index" [formGroupName]="i">
+                <h4>Item {{ i + 1 }}</h4>
+                <div>
+                    <label for="productId_{{i}}">ID do Produto:</label>
+                    <input type="text" id="productId_{{i}}" formControlName="productId" required>
+                    <div *ngIf="item.controls['productId'].invalid && (item.controls['productId'].dirty || item.controls['productId'].touched)">
+                        <div *ngIf="item.controls['productId'].errors?.['required']">O ID do produto é obrigatório.</div>
+                    </div>
+                </div>
+                <div>
+                    <label for="quantity_{{i}}">Quantidade:</label>
+                    <input type="number" id="quantity_{{i}}" formControlName="quantity" min="1" required>
+                    <div *ngIf="item.controls['quantity'].invalid && (item.controls['quantity'].dirty || item.controls['quantity'].touched)">
+                        <div *ngIf="item.controls['quantity'].errors?.['required']">A quantidade é obrigatória.</div>
+                        <div *ngIf="item.controls['quantity'].errors?.['min']">A quantidade deve ser maior que zero.</div>
+                    </div>
+                </div>
+                <button type="button" (click)="removeOrderItem(i)">Remover Item</button>
+            </div>
+        </div>
+        <button type="button" (click)="addOrderItem()">Adicionar Item</button>
+
+        <button type="submit" [disabled]="orderForm.invalid">Criar Pedido</button>
+        <button type="button" (click)="goBack()">Voltar</button>
+    </form>
+</div>

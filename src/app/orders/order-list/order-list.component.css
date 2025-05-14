@@ -19,3 +19,16 @@ th, td {
 button {
   margin-right: 0.5rem;
 }
+.client-orders-container {
+  margin: 20px;
+}
+
+  .client-orders-container h2 {
+    margin-bottom: 20px; /* Espaço abaixo do título */
+  }
+
+  .client-orders-container button {
+    margin-right: 10px; /* Espaço entre os botões */
+  }
+
+/* ... outros estilos ... */

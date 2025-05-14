@@ -69,10 +69,10 @@ export class LoginComponent implements OnInit {
       this.http.post<any>(url, this.loginForm.value)
         .subscribe({
           next: (response) => {
-            const token = response.data.accessToken; // Verifique se o token está aqui
+            const token = response.data.accessToken; 
             if (token) {
               localStorage.setItem('token', token);
-              console.log('Token JWT:', token); // Adicione esta linha
+              console.log('Token JWT:', token); 
 
               const decodedToken = decodeToken(token);
               if (decodedToken) {
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
                     redirectUrl = '/dashboard'; 
                     break;
                   case 'Client':
-                    redirectUrl = '/products'; 
+                    redirectUrl = '/client/orders'; 
                     break;
                   case 'Seller':
                     redirectUrl = '/stock'; 

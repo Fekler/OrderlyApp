@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Location } from '@angular/common';
 import { ApiResponse } from '../../interfaces/api-response.interface';
+import { JwtDecoder } from '../../utils/jwt-decoder';
+import { Router } from '@angular/router';
+
 
 
 interface OrderItem {
@@ -34,12 +37,15 @@ export class OrderListComponent implements OnInit {
   errorMessage: string = '';
   isLoading: boolean = true;
   showUuidColumn: boolean = false;
+  isClientPage: boolean = false; 
 
 
-  constructor(private orderService: OrderService, private location: Location) { }
+
+  constructor(private orderService: OrderService, private location: Location,private router : Router) { }
 
   ngOnInit(): void {
     this.loadOrders();
+    this.isClientPage = this.router.url.startsWith('/client/orders'); // Verifica se a rota começa com /client/orders
   }
 
   loadOrders(): void {
@@ -90,7 +96,7 @@ export class OrderListComponent implements OnInit {
   canManageOrder(): boolean {
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = decodeToken(token);
+      const decodedToken = new JwtDecoder().decodeToken(token);
       return decodedToken?.role === 'Admin' || decodedToken?.role === 'Seller';
     }
     return false;

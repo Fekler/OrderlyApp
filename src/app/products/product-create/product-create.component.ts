@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { switchMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
-import { Location } from '@angular/common'; // Importe o Location
+import { Location } from '@angular/common'; 
 
 @Component({
   selector: 'app-product-create',
@@ -24,7 +24,7 @@ export class ProductCreateComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
-    private location: Location // Injete o Location
+    private location: Location 
   ) {
     this.productForm = this.fb.group({
       name: ['', Validators.minLength(1)],

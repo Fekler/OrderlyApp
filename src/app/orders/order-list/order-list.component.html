@@ -1,56 +1,53 @@
-<h2>Lista de Pedidos</h2>
+<div class="orders-container">
+    <h2>{{ isClientPage ? 'Meus Pedidos' : 'Lista de Pedidos' }}</h2>
 
-<!-- Carregando -->
-<div *ngIf="isLoading">
-    Carregando pedidos...
+    <button mat-raised-button color="primary" (click)="goToCreateOrder()" *ngIf="isClientPage">Novo Pedido</button>
+
+    <div *ngIf="isLoading">
+        Carregando pedidos...
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
+
+    <table *ngIf="!isLoading && orders.length > 0">
+        <thead>
+            <tr>
+                <th *ngIf="showUuidColumn">ID do Pedido</th>
+                <th>Número do Pedido</th>
+                <th>Data do Pedido</th>
+                <th>Endereço de Entrega</th>
+                <th>Endereço de Cobrança</th>
+                <th>Método de Pagamento</th>
+                <th>Status</th>
+                <th *ngIf="canManageOrder()">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td *ngIf="showUuidColumn">{{ order.uuid }}</td>
+                <td>{{ order.orderNumber }}</td>
+                <td>{{ order.orderDate | date: 'shortDate' }}</td>
+                <td>{{ order.shippingAddress }}</td>
+                <td>{{ order.billingAddress }}</td>
+                <td>{{ order.paymentMethod }}</td>
+                <td>{{ order.status }}</td>
+                <td *ngIf="canManageOrder()">
+                    <button *ngIf="order.status !== 'Approved'" (click)="updateOrderStatus(order.uuid, 'Approved')">
+                        Aprovar
+                    </button>
+                    <button *ngIf="order.status !== 'Cancelled'" (click)="updateOrderStatus(order.uuid, 'Cancelled')">
+                        Cancelar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="!isLoading && orders.length === 0 && !errorMessage">
+        Nenhum pedido encontrado.
+    </div>
+
+    <button mat-button (click)="goBack()">Voltar</button>
 </div>
-
-<!-- Mensagem de erro -->
-<div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-</div>
-
-<!-- Tabela de pedidos -->
-<table *ngIf="!isLoading && orders.length > 0">
-    <thead>
-        <tr>
-            <th *ngIf="showUuidColumn">ID do Pedido</th>
-            <th>Número do Pedido</th>
-            <th>Data do Pedido</th>
-            <th>Endereço de Entrega</th>
-            <th>Endereço de Cobrança</th>
-            <th>Método de Pagamento</th>
-            <th>Status</th>
-            <th *ngIf="canManageOrder()">Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let order of orders">
-            <td *ngIf="showUuidColumn">{{ order.uuid }}</td>
-            <td>{{ order.orderNumber }}</td>
-            <td>{{ order.orderDate | date: 'shortDate' }}</td>
-            <td>{{ order.shippingAddress }}</td>
-            <td>{{ order.billingAddress }}</td>
-            <td>{{ order.paymentMethod }}</td>
-            <td>{{ order.status }}</td>
-            <td *ngIf="canManageOrder()">
-                <button *ngIf="order.status !== 'Approved'"
-                        (click)="updateOrderStatus(order.uuid, 'Approved')">
-                    Aprovar
-                </button>
-                <button *ngIf="order.status !== 'Cancelled'"
-                        (click)="updateOrderStatus(order.uuid, 'Cancelled')">
-                    Cancelar
-                </button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<!-- Nenhum pedido encontrado -->
-<div *ngIf="!isLoading && orders.length === 0 && !errorMessage">
-    Nenhum pedido encontrado.
-</div>
-
-<!-- Botão de voltar -->
-<button mat-button (click)="goBack()">Voltar</button>

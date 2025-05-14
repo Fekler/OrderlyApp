@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { ApiResponse } from '../interfaces/api-response.interface';
+import { ProductDto, CreateProductDto, UpdateProductDto } from '../interfaces/product.interface'; 
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +31,7 @@ export class ProductService {
     return this.http.get(this.apiUrl, { headers });
   }
 
-  updateProduct(uuid: string, product: any): Observable<any> {
+  updateProduct(uuid: string, product: UpdateProductDto): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
