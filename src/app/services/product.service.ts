@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class ProductService {
 
-  private apiUrl = `${environment.apiBaseUrl}/api/v1/Products`; // Ajuste a URL da API se necessário
+  private apiUrl = `${environment.apiBaseUrl}/api/v1/Products`; 
 
   constructor(private http: HttpClient) { }
 
@@ -46,6 +46,7 @@ export class ProductService {
     });
     return this.http.post(this.apiUrl, product, { headers });
   }
+
   deleteProduct(uuid: string): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({

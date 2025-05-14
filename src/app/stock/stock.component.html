@@ -1,6 +1,7 @@
 <h2>Lista de Produtos</h2>
 
 <button mat-raised-button color="primary" (click)="goToCreateProduct()">Cadastrar Produto</button>
+<button mat-raised-button color="accent" routerLink="/order-list">Ir para Lista de Pedidos</button>
 
 <div *ngIf="isLoading">
     Carregando produtos...

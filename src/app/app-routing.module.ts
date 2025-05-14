@@ -31,6 +31,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' }
     ]
   },
+  { path: 'order-list', component: OrderListComponent, canActivate: [VendedorGuard] }, 
   { path: 'stock', component: StockComponent, canActivate: [VendedorGuard] }, // Protege a rota de estoque
   { path: 'users', component: UsersComponent },
   { path: 'users/create', component: UserCreateComponent },

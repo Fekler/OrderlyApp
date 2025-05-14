@@ -24,7 +24,7 @@ export class StockComponent implements OnInit {
     this.isLoading = true;
     this.productService.getProducts().subscribe({
       next: (data) => {
-        this.products = data.data; // AQUI ESTÁ A MUDANÇA
+        this.products = data.data; 
         this.isLoading = false;
       },
       error: (error) => {

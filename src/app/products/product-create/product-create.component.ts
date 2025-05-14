@@ -27,9 +27,9 @@ export class ProductCreateComponent implements OnInit {
     private location: Location // Injete o Location
   ) {
     this.productForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', Validators.minLength(1)],
       description: [''],
-      price: [0, [Validators.required, Validators.min(0)]],
+      price: [0, [Validators.required, Validators.min(0.01)]],
       quantity: [0, [Validators.required, Validators.min(0)]],
       category: ['']
     });
@@ -91,10 +91,9 @@ export class ProductCreateComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back(); // Usa o serviço Location para voltar à página anterior
-    // Ou você pode usar:
-    // this.router.navigate(['/stock']); // Navega diretamente para a lista de produtos
+    this.location.back();
   }
+
   deleteProduct(): void {
     if (confirm('Tem certeza que deseja excluir este produto?')) {
       const uuid = this.route.snapshot.paramMap.get('uuid');

@@ -4,9 +4,28 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../environments/environment';
-
+import { OrderService } from '../services/order.service';
 // Defina a URL da API como uma constante
 const LOGIN_ENDPOINT = '/api/auth/login';
+interface OrderItem {
+  uuid: string;
+  productId: string;
+  orderId: string;
+  quantity: number;
+}
+
+interface Order {
+  uuid: string;
+  orderNumber: string;
+  orderDate?: string;
+  shippingAddress?: string;
+  billingAddress?: string;
+  paymentMethod?: string;
+  status?: string;
+  actionedByUserUuid?: string;
+  orderItems?: OrderItem[];
+}
+
 
 function decodeToken(token: string): any {
   try {
@@ -31,11 +50,14 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   });
+  showOrderList = false;
+  orders: Order[] = [];
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {

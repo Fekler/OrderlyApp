@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient } from '@angular/common/http'; 
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +24,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthInterceptor } from './interceptors/auth.interceptor'; 
+import { AuthService } from './services/auth.service'; 
 
 
 
@@ -54,10 +56,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatIconModule 
+    MatIconModule
+
   ],
   providers: [
-    provideHttpClient(), 
+    provideHttpClient(),
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } // Registre o interceptor
   ],
   bootstrap: [AppComponent]
 })
