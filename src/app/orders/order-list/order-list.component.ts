@@ -76,7 +76,7 @@ export class OrderListComponent implements OnInit {
   }
 
   goToCreateOrder(): void {
-    this.location.go('/orders/create');
+    this.router.navigate(['/orders/create']);
   }
 
   updateOrderStatus(orderUuid: string, newStatus: string): void {

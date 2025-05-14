@@ -1,7 +1,6 @@
 import { PaymentMethod, OrderStatus } from '../interfaces/enums.interface';
 export interface CreateOrderItemDto {
   productId: string;
-  orderId: string;
   quantity: number;
 }
 
@@ -25,7 +24,6 @@ export interface CreateOrderDto {
   shippingAddress: string;
   billingAddress: string;
   paymentMethod: PaymentMethod;
-  createByUserUuid?: string;
   orderItems: CreateOrderItemDto[];
 }
 

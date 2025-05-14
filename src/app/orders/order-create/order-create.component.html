@@ -1,7 +1,11 @@
 <div class="order-create-container">
     <h2>Novo Pedido</h2>
 
-    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="isLoading">
+        <p>Carregando produtos...</p>
+    </div>
+
+    <form *ngIf="!isLoading" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
         <div>
             <label for="shippingAddress">Endereço de Entrega:</label>
             <input type="text" id="shippingAddress" formControlName="shippingAddress" required>
@@ -24,37 +28,51 @@
             <label for="paymentMethod">Método de Pagamento:</label>
             <select id="paymentMethod" formControlName="paymentMethod" required>
                 <option value="" disabled>Selecione o método de pagamento</option>
-                <option *ngFor="let method of paymentMethods" [value]="method">{{ method }}</option>
+                <option value="CreditCard">Cartão de Crédito</option>
+                <option value="DebitCard">Cartão de Débito</option>
+                <option value="BankTransfer">Transferência Bancária</option>
+                <option value="Cash">Dinheiro</option>
+                <option value="Pix">Pix</option>
             </select>
             <div *ngIf="orderForm.controls['paymentMethod'].invalid && (orderForm.controls['paymentMethod'].dirty || orderForm.controls['paymentMethod'].touched)">
                 <div *ngIf="orderForm.controls['paymentMethod'].errors?.['required']">O método de pagamento é obrigatório.</div>
             </div>
         </div>
+        <div>
+            <h3>Total (Estimado): {{ totalAmount | currency:'BRL' }}</h3>
+        </div>
 
         <h3>Itens do Pedido:</h3>
         <div formArrayName="orderItems">
-            <div *ngFor="let item of orderItems.controls; let i = index" [formGroupName]="i">
-                <h4>Item {{ i + 1 }}</h4>
+            <div *ngFor="let i of orderItems.controls; let index = index" [formGroupName]="index">
                 <div>
-                    <label for="productId_{{i}}">ID do Produto:</label>
-                    <input type="text" id="productId_{{i}}" formControlName="productId" required>
-                    <div *ngIf="item.controls['productId'].invalid && (item.controls['productId'].dirty || item.controls['productId'].touched)">
-                        <div *ngIf="item.controls['productId'].errors?.['required']">O ID do produto é obrigatório.</div>
+                    <label for="productId_{{index}}">Produto:</label> <select id="productId_{{index}}" formControlName="productId" required (change)="calculateTotalAmount()">
+                        <option value="" disabled>Selecione um produto</option>
+                        <option *ngFor="let product of products" [value]="product.uuid">{{ product.name }}</option>
+                    </select>
+                    <div *ngIf="i.get('productId')?.invalid && (i.get('productId')?.dirty || i.get('productId')?.touched)">
+                        <div *ngIf="i.get('productId')?.errors?.['required']">O produto é obrigatório.</div>
                     </div>
                 </div>
+
                 <div>
-                    <label for="quantity_{{i}}">Quantidade:</label>
-                    <input type="number" id="quantity_{{i}}" formControlName="quantity" min="1" required>
-                    <div *ngIf="item.controls['quantity'].invalid && (item.controls['quantity'].dirty || item.controls['quantity'].touched)">
-                        <div *ngIf="item.controls['quantity'].errors?.['required']">A quantidade é obrigatória.</div>
-                        <div *ngIf="item.controls['quantity'].errors?.['min']">A quantidade deve ser maior que zero.</div>
+                    <label>Preço Unitário:</label>
+                    <span>Valor unitário: {{ getUnitPrice(i.get('productId')?.value) | currency:'BRL' }}</span>
+                    <span>Valor total do item: {{ getItemTotal(i) | currency:'BRL' }}</span>
+                </div>
+
+                <div>
+                    <label for="quantity_{{index}}">Quantidade:</label> <input type="number" id="quantity_{{index}}" formControlName="quantity" min="1" required (input)="calculateTotalAmount()"> <div *ngIf="i.get('quantity')?.invalid && (i.get('quantity')?.dirty || i.get('quantity')?.touched)">
+                        <div *ngIf="i.get('quantity')?.errors?.['required']">A quantidade é obrigatória.</div>
+                        <div *ngIf="i.get('quantity')?.errors?.['min']">A quantidade deve ser maior que zero.</div>
                     </div>
                 </div>
-                <button type="button" (click)="removeOrderItem(i)">Remover Item</button>
+
+                <button type="button" (click)="removeOrderItem(index)">Remover Item</button>
             </div>
         </div>
         <button type="button" (click)="addOrderItem()">Adicionar Item</button>
-
+        <br>
         <button type="submit" [disabled]="orderForm.invalid">Criar Pedido</button>
         <button type="button" (click)="goBack()">Voltar</button>
     </form>

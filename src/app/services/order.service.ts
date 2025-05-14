@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ApiResponse } from '../interfaces/api-response.interface'; 
+import { CreateOrderDto, CreateOrderItemDto } from '../interfaces/order.interface';
 
 interface OrderItem {
   uuid: string;
@@ -43,7 +44,13 @@ export class OrderService {
     return this.http.get<ApiResponse<Order[]>>(this.apiUrl, { headers });
 
   }
-
+  createOrder(order: CreateOrderDto): Observable<ApiResponse<Order>> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<ApiResponse<Order>>(this.apiUrl, order, { headers });
+  }
   updateOrderStatus(orderUuid: string, status: string): Observable<ApiResponse<any>> {
     const body: UpdateOrderStatusRequest = { status };
     const token = localStorage.getItem('token');

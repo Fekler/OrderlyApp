@@ -33,7 +33,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' }
     ]
   },
-  { path: 'orders/create', component: OrderCreateComponent, canActivate: [ClientGuard] },
+  //{ path: 'orders/create', component: OrderCreateComponent, canActivate: [ClientGuard] },
   { path: 'client/orders', component: OrderListComponent, canActivate: [ClientGuard] }, 
   { path: 'order-list', component: OrderListComponent, canActivate: [VendedorGuard] }, 
   { path: 'stock', component: StockComponent, canActivate: [VendedorGuard] }, 
