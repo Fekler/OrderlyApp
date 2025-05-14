@@ -54,11 +54,29 @@ export class LoginComponent implements OnInit {
 
               const decodedToken = decodeToken(token);
               if (decodedToken) {
-                console.log('Decoded Token Payload:', decodedToken); // Exibe o payload decodificado
-              }
+                const role = decodedToken.role;
+                let redirectUrl = '/dashboard'; 
 
-              this.router.navigate(['/dashboard']); // Navegação para o dashboard
-              this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+                switch (role) {
+                  case 'Admin':
+                    redirectUrl = '/dashboard'; 
+                    break;
+                  case 'Client':
+                    redirectUrl = '/products'; 
+                    break;
+                  case 'Seller':
+                    redirectUrl = '/stock'; 
+                    break;
+                  default:
+                    this.snackBar.open('Role desconhecida. Redirecionando para o dashboard.', 'Fechar', { duration: 5000 });
+                }
+
+                this.router.navigate([redirectUrl]);
+                this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+
+              } else {
+                this.snackBar.open('Login successful, but token could not be decoded!', 'Close', { duration: 5000 });
+              }
             } else {
               this.snackBar.open('Login successful, but token not received!', 'Close', { duration: 5000 });
             }
@@ -71,4 +89,3 @@ export class LoginComponent implements OnInit {
     }
   }
 }
-

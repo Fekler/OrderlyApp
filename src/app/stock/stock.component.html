@@ -1,1 +1,44 @@
-<p>stock works!</p>
+<h2>Lista de Produtos</h2>
+
+<button mat-raised-button color="primary" (click)="goToCreateProduct()">Cadastrar Produto</button>
+
+<div *ngIf="isLoading">
+    Carregando produtos...
+</div>
+
+<div *ngIf="errorMessage" style="color: red;">
+    {{ errorMessage }}
+</div>
+
+<table *ngIf="products.length > 0">
+    <thead>
+        <tr>
+            <th *ngIf="showUuidColumn">UUID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td *ngIf="showUuidColumn">{{ product.uuid }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.category }}</td>
+            <td>
+                <button mat-icon-button color="primary" (click)="goToEditProduct(product.uuid)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="!isLoading && products.length === 0 && !errorMessage">
+    Nenhum produto encontrado.
+</div>

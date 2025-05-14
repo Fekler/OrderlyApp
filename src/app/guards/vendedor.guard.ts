@@ -19,7 +19,7 @@ export class VendedorGuard implements CanActivate {
         const payload = JSON.parse(atob(token.split('.')[1]));
         const role = payload.role;
 
-        if (role === 'Vendedor') {
+        if (role === 'Seller') {
           return true;
         } else {
           this.router.navigate(['/dashboard']); // Redireciona para o dashboard se não for vendedor
