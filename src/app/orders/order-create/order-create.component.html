@@ -30,7 +30,6 @@
                 <option value="" disabled>Selecione o método de pagamento</option>
                 <option value="CreditCard">Cartão de Crédito</option>
                 <option value="DebitCard">Cartão de Débito</option>
-                <option value="BankTransfer">Transferência Bancária</option>
                 <option value="Cash">Dinheiro</option>
                 <option value="Pix">Pix</option>
             </select>
@@ -64,8 +63,8 @@
                 <div>
                     <label>Preço Unitário:</label>
                     <span>Valor unitário: {{ getUnitPrice(i.get('productId')?.value) | currency:'BRL' }}</span>
-                    <span>Valor total do item: {{ getItemTotal(i) | currency:'BRL' }}</span>
-                </div>
+<!--                     <span>Valor total do item: {{ getItemTotal(i) | currency:'BRL' }}</span>
+ -->                </div>
 
                 <div>
                     <label for="quantity_{{index}}">Quantidade:</label>

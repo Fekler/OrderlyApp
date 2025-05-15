@@ -4,14 +4,16 @@ import { Location } from '@angular/common';
 import { ApiResponse } from '../../interfaces/api-response.interface';
 import { JwtDecoder } from '../../utils/jwt-decoder';
 import { Router } from '@angular/router';
-
-
+import { OrderStatus, PaymentMethod } from '../../interfaces/enums.interface'
 
 interface OrderItem {
   uuid: string;
   productId: string;
   orderId: string;
   quantity: number;
+  productName?: string; 
+  unitPrice?: number;        
+  totalPrice?: number;        
 }
 
 interface Order {
@@ -20,9 +22,11 @@ interface Order {
   orderDate?: string;
   shippingAddress?: string;
   billingAddress?: string;
-  paymentMethod?: string;
-  status?: string;
+  paymentMethod?: number;
+  status?: number;
+  totalAmount: number;
   actionedByUserUuid?: string;
+  showDetails?: boolean; 
   orderItems?: OrderItem[];
 }
 
@@ -37,11 +41,14 @@ export class OrderListComponent implements OnInit {
   errorMessage: string = '';
   isLoading: boolean = true;
   showUuidColumn: boolean = false;
-  isClientPage: boolean = false; 
+  isClientPage: boolean = false;
+  showDetails: boolean = false; 
 
 
 
-  constructor(private orderService: OrderService, private location: Location,private router : Router) { }
+  constructor(private orderService: OrderService,
+    private location: Location,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loadOrders();
@@ -71,15 +78,15 @@ export class OrderListComponent implements OnInit {
     this.location.back();
   }
 
-  goToEditOrder(uuid: string): void {
-    this.location.go(`/orders/${uuid}/edit`);
-  }
+  //goToEditOrder(uuid: string): void {
+  //  this.location.go(`/orders/${uuid}/edit`);
+  //}
 
   goToCreateOrder(): void {
     this.router.navigate(['/orders/create']);
   }
 
-  updateOrderStatus(orderUuid: string, newStatus: string): void {
+  updateOrderStatus(orderUuid: string, newStatus: number): void {
     this.orderService.updateOrderStatus(orderUuid, newStatus).subscribe({
       next: (response) => {
         if (response.success) {
@@ -92,6 +99,9 @@ export class OrderListComponent implements OnInit {
     });
   }
 
+  toggleDetails(order: any): void {
+    order.showDetails = !order.showDetails;
+  }
 
   canManageOrder(): boolean {
     const token = localStorage.getItem('token');
@@ -100,6 +110,32 @@ export class OrderListComponent implements OnInit {
       return decodedToken?.role === 'Admin' || decodedToken?.role === 'Seller';
     }
     return false;
+  }
+  getPaymentMethodText(paymentMethod: number | undefined): string {
+    switch (paymentMethod) {
+      case PaymentMethod.CreditCard:
+        return 'Cartão de Crédito';
+      case PaymentMethod.DebitCard:
+        return 'Cartão de Débito';
+      case PaymentMethod.Pix:
+        return 'Pix';
+      case PaymentMethod.Cash:
+        return 'Dinheiro';
+      default:
+        return 'Desconhecido';
+    }
+  }
+  getOrderStatusText(status: number | undefined): string {
+    switch (status) {
+      case OrderStatus.Pending:
+        return 'Pendente';
+      case OrderStatus.Approved:
+        return 'Aprovado';
+      case OrderStatus.Cancelled:
+        return 'Cancelado';
+      default:
+        return 'Desconhecido';
+    }
   }
 }
 

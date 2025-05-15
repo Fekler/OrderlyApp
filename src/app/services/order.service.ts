@@ -10,22 +10,26 @@ interface OrderItem {
   productId: string;
   orderId: string;
   quantity: number;
+  productName?: string;
+  unitPrice?: number;
+  totalPrice?: number;
 }
 
 interface Order {
   uuid: string;
   orderNumber: string;
-  orderDate?: string; // Ou Date, dependendo do formato da API
+  orderDate?: string; 
   shippingAddress?: string;
   billingAddress?: string;
-  paymentMethod?: string; // Corresponde ao enum PaymentMethod
-  status?: string;       // Corresponde ao enum OrderStatus
+  paymentMethod?: number; 
+  status?: number;      
   actionedByUserUuid?: string;
+  totalAmount: number;
   orderItems?: OrderItem[];
 }
 
 interface UpdateOrderStatusRequest {
-  status: string;
+  status: number;
 }
 
 @Injectable({
@@ -51,7 +55,7 @@ export class OrderService {
     });
     return this.http.post<ApiResponse<Order>>(this.apiUrl, order, { headers });
   }
-  updateOrderStatus(orderUuid: string, status: string): Observable<ApiResponse<any>> {
+  updateOrderStatus(orderUuid: string, status: number): Observable<ApiResponse<any>> {
     const body: UpdateOrderStatusRequest = { status };
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({

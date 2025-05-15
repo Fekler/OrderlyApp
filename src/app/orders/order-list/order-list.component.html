@@ -21,29 +21,47 @@
                 <th>Endereço de Cobrança</th>
                 <th>Método de Pagamento</th>
                 <th>Status</th>
+                <th>Valor Total</th>
+                <th>Exibir</th>
                 <th *ngIf="canManageOrder()">Ações</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let order of orders">
-                <td *ngIf="showUuidColumn">{{ order.uuid }}</td>
-                <td>{{ order.orderNumber }}</td>
-                <td>{{ order.orderDate | date: 'shortDate' }}</td>
-                <td>{{ order.shippingAddress }}</td>
-                <td>{{ order.billingAddress }}</td>
-                <td>{{ order.paymentMethod }}</td>
-                <td>{{ order.status }}</td>
-                <td *ngIf="canManageOrder()">
-                    <button *ngIf="order.status !== 'Approved'" (click)="updateOrderStatus(order.uuid, '1')">
-                        Aprovar
-                    </button>
-                    <button *ngIf="order.status !== 'Cancelled'" (click)="updateOrderStatus(order.uuid, '2')">
-                        Cancelar
-                    </button>
-                </td>
-            </tr>
+            <ng-container *ngFor="let order of orders">
+
+                <tr>
+                    <td *ngIf="showUuidColumn">{{ order.uuid }}</td>
+                    <td> {{ order.orderNumber }}</td>
+                    <td>{{ order.orderDate | date: 'shortDate' }}</td>
+                    <td>{{ order.shippingAddress }}</td>
+                    <td>{{ order.billingAddress }}</td>
+                    <td>{{ getPaymentMethodText(order.paymentMethod) }}</td>
+                    <td>{{ getOrderStatusText(order.status) }}</td>
+                    <td>{{ order.totalAmount| currency:'BRL' }}</td>
+                    <td><button (click)="toggleDetails(order)">Detalhes</button> </td>
+                    <td *ngIf="canManageOrder()">
+                        <button *ngIf="order.status === 0" (click)="updateOrderStatus(order.uuid, 1)">Aprovar</button>
+                        <button *ngIf="order.status === 0 " (click)="updateOrderStatus(order.uuid, 2)">Cancelar</button>
+
+                    </td>
+
+                </tr>
+                <tr *ngIf="order.showDetails">
+                    <td colspan="8">
+                        <div *ngIf="order.orderItems && order.orderItems.length > 0; else noItems">
+                            <ul>
+                                <li *ngFor="let item of order.orderItems">
+                                    Produto: {{ item.productName }} - Qtd: {{ item.quantity }} - Preço: {{ item.unitPrice | currency:'BRL' }} - Total: {{ item.totalPrice | currency:'BRL' }}
+                                </li>
+                            </ul>
+                        </div>
+                        <ng-template #noItems>Nenhum item neste pedido.</ng-template>
+                    </td>
+                </tr>
+            </ng-container>
         </tbody>
     </table>
+   
 
     <div *ngIf="!isLoading && orders.length === 0 && !errorMessage">
         Nenhum pedido encontrado.

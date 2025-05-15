@@ -215,7 +215,11 @@ export class OrderCreateComponent implements OnInit {
   getItemTotal(item: FormGroup): number {
     const productId = item.get('productId')?.value;
     const quantity = +item.get('quantity')?.value || 0; // '+' converte para número
-    const unitPrice = this.getUnitPrice(productId);
+    var unitPrice = this.getUnitPrice(productId);
+    if (unitPrice === null || unitPrice === undefined) {
+      unitPrice = 0; 
+    }
+
     return unitPrice * quantity;
   }
 
