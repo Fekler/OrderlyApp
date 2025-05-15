@@ -1,1 +1,18 @@
+<div class="app-container">
+    <header *ngIf="showHeader" class="app-header">
+        <div class="app-header-left">
+            <span *ngIf="shouldShowDashboard()" routerLink="/dashboard" class="header-link">Dashboard</span>
+            <span *ngIf="shouldShowUsuarios()" routerLink="/admin/users" class="header-link">Usuários</span>
+            <span *ngIf="shouldShowProdutos()" routerLink="/stock" class="header-link">Produtos</span>
+            <span *ngIf="shouldShowPedidos()" routerLink="{{getOrderLink()}}" class="header-link">Pedidos</span>
+        </div>
+        <div class="app-header-right">
+            <span *ngIf="loggedInUserName" class="user-info">Olá, {{ loggedInUserName }} ({{ loggedInUserRole }})</span>
+            <button (click)="logout()">Sair</button>
+        </div>
+    </header>
+    <main class="app-content">
+        <router-outlet></router-outlet>
+    </main>
+</div>
 <router-outlet></router-outlet>

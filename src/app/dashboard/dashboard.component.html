@@ -1,1 +1,49 @@
-<p>dashboard works!</p>
+<h2>Dashboard Administrativo</h2>
+
+<div *ngIf="isLoading">
+    Carregando dados...
+</div>
+
+<div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+</div>
+
+<div *ngIf="!isLoading && !errorMessage">
+    <section class="summary-section">
+        <h3>Resumo de Vendas</h3>
+        <div *ngIf="salesSummary">
+            <p>Total de Pedidos: {{ salesSummary.totalOrders }}</p>
+            <p>Valor Faturado: {{ salesSummary.totalRevenue | currency:'BRL':'symbol':'1.2-2' }}</p>
+            <p>Produtos Vendidos: {{ salesSummary.totalProductsSold }}</p>
+        </div>
+        <div *ngIf="!salesSummary">
+            <p>Nenhum dado de resumo de vendas disponível.</p>
+        </div>
+    </section>
+
+    <section class="pending-orders-section">
+        <h3>Pedidos Pendentes</h3>
+        <div *ngIf="pendingOrdersCount !== null">
+            <p>Número de Pedidos Pendentes: {{ pendingOrdersCount }}</p>
+        </div>
+        <div *ngIf="pendingOrdersCount === null">
+            <p>Nenhum dado de pedidos pendentes disponível.</p>
+        </div>
+    </section>
+
+    <section class="active-customers-section styled-list-container">
+        <h3 class="styled-list-title">Clientes Mais Ativos</h3>
+        <div *ngIf="mostActiveCustomers.length > 0">
+            <ul class="styled-list">
+                <li *ngFor="let customer of mostActiveCustomers" class="styled-list-item">
+                    <span class="styled-list-item-content">
+                        {{ customer.customerName }} ({{ customer.orderCount }} pedidos)
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="mostActiveCustomers.length === 0">
+            <p>Nenhum cliente ativo encontrado.</p>
+        </div>
+    </section>
+</div>

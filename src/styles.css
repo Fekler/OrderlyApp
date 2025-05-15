@@ -1,1 +1,143 @@
 /* You can add global styles to this file, and also import other style files */
+/* Estilos gerais para toda a aplicação */
+body {
+  font-family: 'Roboto', sans-serif; /* Fonte padrão */
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4; /* Cor de fundo geral */
+  color: #333; /* Cor do texto padrão */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+h2 {
+  color: #3f51b5; /* Cor primária do Angular Material */
+  margin-bottom: 15px;
+  border-bottom: 2px solid #3f51b5;
+  padding-bottom: 5px;
+}
+
+.error-message {
+  color: #f44336; /* Cor de erro do Angular Material */
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Estilos para botões Angular Material */
+.mat-raised-button.mat-primary {
+  background-color: #3f51b5;
+  color: white;
+  margin-right: 10px;
+}
+
+.mat-button {
+  margin-right: 10px;
+}
+
+.mat-icon-button {
+  margin-left: 5px;
+}
+
+/* Estilos para tabelas Angular Material */
+.mat-elevation-z8 {
+  width: 100%;
+  margin-top: 20px;
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,.2); /* Sombra mais suave */
+  border-radius: 4px;
+  overflow: hidden; /* Garante que a borda arredondada funcione */
+  background-color: white;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+  color: #3f51b5;
+}
+
+.mat-cell {
+  border-bottom: 1px solid #ddd;
+}
+
+.mat-row:last-child .mat-cell {
+  border-bottom: none;
+}
+
+/* Estilos para formulários Angular Material */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.mat-form-field {
+  width: 100%; /* Ocupar a largura total do container pai */
+}
+
+  .mat-form-field.ng-invalid.ng-touched .mat-form-field-label {
+    color: #f44336; /* Cor do label em caso de erro */
+  }
+
+  .mat-form-field.ng-invalid.ng-touched .mat-input-element {
+    border-bottom-color: #f44336;
+  }
+
+.mat-error {
+  font-size: 0.8em;
+}
+
+/* Estilos específicos para checkbox */
+mat-checkbox {
+  margin-top: 10px;
+}
+
+/* Estilos para a seção de botões do formulário */
+form > div {
+  margin-top: 15px;
+}
+/* Estilos reutilizáveis para listas */
+.styled-list-container {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.styled-list-title {
+  color: #3f51b5;
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.styled-list {
+  list-style: none;
+  padding: 0;
+}
+
+.styled-list-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+  .styled-list-item:last-child {
+    border-bottom: none;
+  }
+
+.styled-list-item-content {
+  /* Pode adicionar estilos específicos para o conteúdo de cada item, se necessário */
+}

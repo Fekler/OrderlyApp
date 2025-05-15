@@ -1,0 +1,35 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 5vh;
+}
+
+.app-header {
+  background-color: #f0f0f0;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.app-header-left span.header-link {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+
+  .app-header-left span.header-link:hover {
+    color: #007bff;
+  }
+
+.app-header-right span.user-info {
+  margin-right: 15px;
+  color: #555;
+}
+
+.app-content {
+  flex-grow: 1;
+  padding: 20px;
+}

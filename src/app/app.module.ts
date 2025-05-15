@@ -27,7 +27,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/auth.interceptor'; 
 import { AuthService } from './services/auth.service'; 
 import { CommonModule } from '@angular/common';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule } from '@angular/material/tooltip'; 
 
 
 @NgModule({
@@ -59,7 +62,11 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     ReactiveFormsModule,
     MatIconModule,
-    CommonModule
+    CommonModule,
+    MatSelectModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatTooltipModule 
 
 
   ],

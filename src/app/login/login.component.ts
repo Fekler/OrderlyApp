@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
 
                 switch (role) {
                   case 'Admin':
-                    redirectUrl = '/dashboard'; 
+                    redirectUrl = '/admin/users'; 
                     break;
                   case 'Client':
                     redirectUrl = '/client/orders'; 

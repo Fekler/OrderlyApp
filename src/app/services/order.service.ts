@@ -18,7 +18,9 @@ interface OrderItem {
 interface Order {
   uuid: string;
   orderNumber: string;
-  orderDate?: string; 
+  orderDate?: string;
+  createByUserEmail?: string;
+  createByUserName?: string;
   shippingAddress?: string;
   billingAddress?: string;
   paymentMethod?: number; 

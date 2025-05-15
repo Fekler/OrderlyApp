@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table'; 
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule } from '@angular/material/tooltip'; 
 
 
 
@@ -35,7 +36,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSelectModule,
     MatTableModule, 
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTooltipModule 
+
 
   ]
 })

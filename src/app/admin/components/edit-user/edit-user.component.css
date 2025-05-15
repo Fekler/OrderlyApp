@@ -1,0 +1,40 @@
+/* Estilos específicos para o EditUserComponent */
+form {
+  max-width: 600px; /* Limita a largura do formulário */
+  margin: 20px auto; /* Centraliza o formulário na página */
+  padding: 20px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-checkbox {
+  margin-top: 10px;
+}
+
+form > div { /* Estilos para a div dos botões */
+  margin-top: 20px;
+  display: flex;
+  gap: 10px; /* Espaçamento entre os botões */
+  justify-content: flex-start; /* Alinha os botões à esquerda */
+}
+
+button.mat-raised-button.mat-primary {
+  /* Os estilos para este botão já estão definidos no CSS global */
+}
+
+button.mat-button {
+  /* Os estilos para este botão já estão definidos no CSS global */
+}
+
+.error-message {
+  /* Os estilos para esta classe já estão definidos no CSS global */
+  margin-top: 20px; /* Adiciona mais espaço acima da mensagem de erro no formulário */
+}

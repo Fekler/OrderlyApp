@@ -1,0 +1,47 @@
+/* Estilos específicos para o UserListComponent */
+.user-list-container {
+  padding: 20px;
+}
+
+  .user-list-container h2 {
+    /* Os estilos para h2 já estão definidos no CSS global */
+    margin-bottom: 20px;
+  }
+
+  .user-list-container button.mat-raised-button.mat-primary {
+    /* Os estilos para este botão já estão definidos no CSS global */
+    margin-bottom: 20px;
+  }
+
+  .user-list-container .loading-message {
+    font-style: italic;
+    color: #777;
+    margin-top: 10px;
+  }
+
+  .user-list-container .error-message {
+    /* Os estilos para esta classe já estão definidos no CSS global */
+    margin-top: 10px;
+  }
+
+  .user-list-container .mat-elevation-z8 {
+    /* Os estilos para esta classe já estão definidos no CSS global */
+  }
+
+  .user-list-container .mat-icon-button {
+    /* Os estilos para esta classe já estão definidos no CSS global */
+  }
+/* Estilos para reduzir o tamanho dos botões de ícone */
+.mat-icon-button {
+  width: 30px; /* Ajuste o tamanho conforme necessário */
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  font-size: 16px; /* Ajuste o tamanho do ícone conforme necessário */
+}
+
+  .mat-icon-button .mat-icon {
+    font-size: 16px; /* Ajuste o tamanho do ícone conforme necessário */
+    width: 16px;
+    height: 16px;
+  }

@@ -17,6 +17,8 @@
                 <th *ngIf="showUuidColumn">ID do Pedido</th>
                 <th>Número do Pedido</th>
                 <th>Data do Pedido</th>
+                <th>Cliente</th>
+                <th>Email</th>
                 <th>Endereço de Entrega</th>
                 <th>Endereço de Cobrança</th>
                 <th>Método de Pagamento</th>
@@ -33,6 +35,8 @@
                     <td *ngIf="showUuidColumn">{{ order.uuid }}</td>
                     <td> {{ order.orderNumber }}</td>
                     <td>{{ order.orderDate | date: 'shortDate' }}</td>
+                    <td>{{ order.createByUserName }}</td>
+                    <td>{{ order.createByUserEmail }}</td>
                     <td>{{ order.shippingAddress }}</td>
                     <td>{{ order.billingAddress }}</td>
                     <td>{{ getPaymentMethodText(order.paymentMethod) }}</td>
@@ -67,5 +71,4 @@
         Nenhum pedido encontrado.
     </div>
 
-    <button mat-button (click)="goBack()">Voltar</button>
 </div>

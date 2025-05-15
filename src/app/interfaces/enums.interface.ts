@@ -16,7 +16,7 @@ export enum OrderStatus {
 }
 
 export enum UserRole {
-  Admin = 0,
-  Client = 1,
-  Seller = 2
+  Client = 0,
+  Seller = 1,
+  Admin = 2
 }

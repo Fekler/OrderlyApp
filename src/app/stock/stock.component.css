@@ -1,0 +1,14 @@
+/* Estilos para reduzir o tamanho dos botões de ícone na lista de produtos */
+.mat-icon-button {
+  width: 30px; /* Ajuste o tamanho conforme necessário */
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  font-size: 16px; /* Ajuste o tamanho do ícone conforme necessário */
+}
+
+  .mat-icon-button .mat-icon {
+    font-size: 16px; /* Ajuste o tamanho do ícone conforme necessário */
+    width: 16px;
+    height: 16px;
+  }
