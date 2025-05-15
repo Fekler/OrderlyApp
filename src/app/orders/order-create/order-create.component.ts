@@ -48,6 +48,45 @@ export class OrderCreateComponent implements OnInit {
     this.subscribeToOrderItemsChanges();
   }
 
+  onSubmit(): void {
+
+    if (this.orderForm.valid) {
+      const selectedPaymentMethod = this.orderForm.get('paymentMethod')?.value;
+      const paymentMethodToSend = this.paymentMethodMap[selectedPaymentMethod];
+      const createOrderDto: CreateOrderDto = {
+        ...this.orderForm.value,
+        paymentMethod: paymentMethodToSend,
+        orderItems: this.orderItems.value.map((item: { productId: string; quantity: string }) => ({
+          productId: item.productId,
+          quantity: parseInt(item.quantity, 10)
+        }))
+      };
+
+      this.orderService.createOrder(createOrderDto).subscribe({
+        next: (response) => {
+          if (response.success) {
+            this.snackBar.open('Pedido criado com sucesso!', 'Fechar', { duration: 3000 });
+            this.router.navigate(['/client/orders']);
+          } else {
+            this.snackBar.open(`Erro ao criar pedido: ${response.message}`, 'Fechar', { duration: 5000 });
+          }
+        },
+        error: (error) => {
+          console.error('Erro ao criar pedido:', error);
+          this.snackBar.open('Erro inesperado ao criar pedido.', 'Fechar', { duration: 5000 });
+        }
+      });
+    } else {
+      this.snackBar.open('Por favor, preencha todos os campos corretamente.', 'Fechar', { duration: 3000 });
+    }
+
+  }
+  paymentMethodMap: { [key: string]: number } = {
+    'CreditCard': PaymentMethod.CreditCard,
+    'DebitCard': PaymentMethod.DebitCard,
+    'Cash': PaymentMethod.Cash,
+    'Pix': PaymentMethod.Pix
+  };
 
   loadProducts(): void {
     this.productService.getProducts().subscribe({

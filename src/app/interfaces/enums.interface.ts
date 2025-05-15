@@ -16,11 +16,3 @@ export enum UserRole {
   Customer = 'Customer',
   Manager = 'Manager'
 }
-
-//paymentMethodMap: { [key: string]: number } = {
-//  'CreditCard': PaymentMethod.CreditCard,
-//    'DebitCard': PaymentMethod.DebitCard,
-//      'BankTransfer': PaymentMethod.BankTransfer,
-//        'Cash': PaymentMethod.Cash,
-//          'Pix': PaymentMethod.Pix // Certifique-se de que o valor do enum para Pix esteja correto
-//};
