@@ -1,0 +1,48 @@
+<h2>Criar Novo Usuário</h2>
+
+<form [formGroup]="createUserForm" (ngSubmit)="createUser()">
+    <mat-form-field appearance="outline">
+        <mat-label>Nome Completo</mat-label>
+        <input matInput formControlName="fullName" required>
+        <mat-error *ngIf="createUserForm.controls['fullName'].hasError('required')">Nome Completo é obrigatório.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required email>
+        <mat-error *ngIf="createUserForm.controls['email'].hasError('required')">Email é obrigatório.</mat-error>
+        <mat-error *ngIf="createUserForm.controls['email'].hasError('email')">Email não é válido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="phone">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="password" type="password" required>
+        <mat-error *ngIf="createUserForm.controls['password'].hasError('required')">Senha é obrigatória.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Documento</mat-label>
+        <input matInput formControlName="document">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Perfil</mat-label>
+        <mat-select formControlName="userRole" required>
+            <!--       <mat-option *ngFor="let role of userRoles" [value]="role">{{ role }}</mat-option>
+            -->
+            <mat-option *ngFor="let role of userRoles" [value]="role.value">{{ role.name }}</mat-option>
+
+        </mat-select>
+        <mat-error *ngIf="createUserForm.controls['userRole'].hasError('required')">Perfil é obrigatório.</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="createUserForm.invalid">Criar Usuário</button>
+    <button mat-button (click)="goBack()">Voltar</button>
+</form>
+
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

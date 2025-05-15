@@ -133,6 +133,15 @@ export class OrderListComponent implements OnInit {
         return 'Aprovado';
       case OrderStatus.Cancelled:
         return 'Cancelado';
+      case OrderStatus.Processing:
+        return 'Processando';
+      case OrderStatus.Shipped:
+        return 'Enviado';
+      case OrderStatus.Delivered:
+        return 'Entregue';
+      case OrderStatus.InsuficientProducts:
+        return 'Produtos Insuficientes';
+
       default:
         return 'Desconhecido';
     }

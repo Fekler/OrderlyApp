@@ -40,9 +40,9 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'users/create', component: UserCreateComponent },
   { path: 'reports', component: ReportsComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Defina /login como a rota padrão
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

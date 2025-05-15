@@ -26,7 +26,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/auth.interceptor'; 
 import { AuthService } from './services/auth.service'; 
-import { PaymentMethodPipe, OrderStatusPipe } from './utils/enum-converters';
 import { CommonModule } from '@angular/common';
 
 

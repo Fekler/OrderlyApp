@@ -29,3 +29,11 @@ export interface UserDto {
   userRole: UserRole;
   isActive: boolean;
 }
+
+export interface ChangePasswordDto {
+  uuid: string;
+  oldPassword: string;
+  newPassword: string;
+  ConfirmNewPassword: string;
+
+}

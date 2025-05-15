@@ -8,11 +8,15 @@ export enum PaymentMethod {
 export enum OrderStatus {
   Pending = 0,
   Approved = 1,
-  Cancelled = 2
+  Cancelled = 2,
+  Processing = 3,
+  Shipped = 4,
+  Delivered = 5,
+  InsuficientProducts = 6
 }
 
 export enum UserRole {
-  Admin = 'Admin',
-  Customer = 'Customer',
-  Manager = 'Manager'
+  Admin = 0,
+  Client = 1,
+  Seller = 2
 }
