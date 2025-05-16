@@ -42,24 +42,8 @@ export class AuthInterceptor implements HttpInterceptor {
             // Server-side error
             errorMessage = `Status: ${error.status} - Message: ${error.error.message}`;
           }
-
-          if (error.error && error.error.error === 'invalid_token') {
-            // Token is invalid or expired
             this.authService.logout();
-            this.router.navigate(['/login']);
-          } else if (error.error && error.error === 'insufficient_permissions') {
-            // Insufficient permissions
-            // You might want to handle this differently, e.g., show an error message
-            console.error('Insufficient permissions:', errorMessage);
-            // Optionally, you can navigate to a "forbidden" page or show a snackbar
-            // this.router.navigate(['/forbidden']);
-            this.authService.logout();
-            this.router.navigate(['/login']);
-          } else {
-            // Other 401 errors (e.g., authentication failed)
-            this.authService.logout();
-            this.router.navigate(['/login']);
-          }
+            this.router.navigate(['/login']);   
         }
         return throwError(error);
       })
