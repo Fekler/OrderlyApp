@@ -8,6 +8,6 @@ RUN npm run build -- --configuration production
 
 # Fase 2: Servindo a aplicação com Nginx
 FROM nginx:alpine
-COPY --from=builder /app/dist/sales-order-management-app/. /usr/share/nginx/html/
+COPY --from=builder /app/dist/sales-order-management-app/browser/ /usr/share/nginx/html/
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
