@@ -1,33 +1,19 @@
+<mat-toolbar *ngIf="showHeader" color="primary" class="app-header">
+    <div class="app-header-left">
+        <a *ngIf="shouldShowDashboard()" mat-button routerLink="/dashboard">Dashboard</a>
+        <a *ngIf="shouldShowUsuarios()" mat-button routerLink="/admin/users">Usuários</a>
+        <a *ngIf="shouldShowProdutos()" mat-button routerLink="/stock">Produtos</a>
+        <a *ngIf="shouldShowPedidos()" mat-button [routerLink]="getOrderLink()">Pedidos</a>
+    </div>
+
+    <div class="app-header-right">
+        <span *ngIf="loggedInUserName" class="user-info">
+            Olá, {{ loggedInUserName }} ({{ loggedInUserRole }})
+        </span>
+        <button mat-button color="warn" (click)="logout()">Sair</button>
+    </div>
+</mat-toolbar>
+
 <main class="app-content" [ngClass]="{ 'with-header': showHeader }">
-
-    <mat-toolbar *ngIf="showHeader" color="primary" class="app-header">
-        <div class="app-header-left">
-            <a *ngIf="shouldShowDashboard()"
-               mat-button
-               routerLink="/dashboard"
-               class="header-link">Dashboard</a>
-            <a *ngIf="shouldShowUsuarios()"
-               mat-button
-               routerLink="/admin/users"
-               class="header-link">Usuários</a>
-            <a *ngIf="shouldShowProdutos()"
-               mat-button
-               routerLink="/stock"
-               class="header-link">Produtos</a>
-            <a *ngIf="shouldShowPedidos()"
-               mat-button
-               [routerLink]="getOrderLink()"
-               class="header-link">Pedidos</a>
-        </div>
-
-        <div class="app-header-right">
-            <span *ngIf="loggedInUserName" class="user-info">
-                Olá, {{ loggedInUserName }} ({{ loggedInUserRole }})
-            </span>
-            <button mat-button color="warn" (click)="logout()">Sair</button>
-        </div>
-    </mat-toolbar>
-
-    <main class="app-content">
-        <router-outlet></router-outlet>
-    </main>
+    <router-outlet></router-outlet>
+</main>

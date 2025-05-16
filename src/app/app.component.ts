@@ -44,7 +44,21 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.updateHeaderVisibility(event.urlAfterRedirects);
+      this.loadUserInfo();
+    });
+
+    // chamada inicial caso não navegue após carregamento
+    this.updateHeaderVisibility(this.router.url);
     this.loadUserInfo();
+  }
+
+  updateHeaderVisibility(currentUrl: string): void {
+    // Exibe o header somente se não estiver na rota de login
+    this.showHeader = !['/login', '/register'].includes(currentUrl);
   }
 
   loadUserInfo(): void {
