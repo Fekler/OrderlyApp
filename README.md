@@ -1,59 +1,160 @@
-# SalesOrderManagementApp
+# 🛍️ Sales Order Management - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+Frontend da aplicação **Sales Order Management**, desenvolvido em **Angular 19+** com **Angular Material**. Este projeto oferece uma interface moderna, segura e responsiva para clientes, vendedores e administradores gerenciarem pedidos e produtos de forma eficiente.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Funcionalidades Principais
+
+✅ **Autenticação e Controle de Acesso**
+- Login via JWT
+- Perfis com permissões distintas: `Admin`, `Seller` e `Client`
+
+✅ **Gestão de Pedidos**
+- Criação e listagem de pedidos
+- Aprovação, cancelamento e visualização por papel
+- Visualização detalhada de itens e valores
+
+✅ **Gestão de Produtos e Estoque**
+- Cadastro e edição de produtos
+- Visualização e ajuste de estoque
+
+✅ **Gestão de Usuários**
+- Cadastro, edição e listagem de usuários (Admin)
+- Controle de status ativo/inativo
+
+✅ **Dashboard e Relatórios**
+- Visão gerencial com dados de vendas e clientes ativos (em progresso)
+
+✅ **Angular Material**
+- Utilização ampla de componentes: `mat-form-field`, `mat-select`, `mat-table`, `mat-toolbar`, `mat-snackbar`, entre outros
+
+✅ **Estrutura Modular**
+- Rotas organizadas por feature (`orders`, `products`, `users`, `admin`)
+- Implementação de lazy-loading no módulo de administração
+
+---
+
+## 🧱 Tecnologias
+
+- Angular 19+
+- Angular Material
+- TypeScript
+- RxJS
+- SCSS
+- JWT
+- HTTP Interceptor 
+- Angular Router + Guards
+- Reactive Forms
+- GitHub Actions
+- GitHubContainerRegistry
+- Docker
+- Nginx
+- Deploy via SSH
+
+---
+
+## 🌍 API Backend
+
+A aplicação se comunica com a API hospedada em:
+
+```
+https://sales-dev-api.fekler.tec.br
+```
+
+Configurado via:
+
+```ts
+// src/environments/environment.ts
+export const environment = {
+  production: false,
+  apiBaseUrl: 'https://sales-dev-api.fekler.tec.br'
+};
+```
+
+---
+
+## ⚙️ Como Rodar Localmente
 
 ```bash
+# Clonar o repositório
+Executar a aplicação
+
+# Instalar dependências
+npm install
+
+# Rodar localmente
 ng serve
+
+# Acesse em:
+http://localhost:64611
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🔐 Estrutura de Rotas
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+```text
+/login                         - Login do sistema
+/dashboard                    - Painel geral
+/products                     - Listagem de produtos
+/products/create              - Cadastro de produto
+/orders/create                - Criar novo pedido
+/order-list                   - Visualização de pedidos
+/users                        - Lista de usuários (Admin)
+/users/create                 - Cadastro de usuário (Admin)
+/reports                      - Visão gerencial
+/admin/users                  - Módulo lazy-loaded para administração
+```
+
+---
+
+## 📂 Estrutura do Projeto (resumida)
+
+```
+src/
+├── app/
+│   ├── login/
+│   ├── dashboard/
+│   ├── products/
+│   ├── orders/
+│   ├── stock/
+│   ├── users/
+│   ├── reports/
+│   ├── admin/                  # Lazy-loaded module
+│   ├── guards/                 # VendedorGuard, ClientGuard
+│   ├── interceptors/           # AuthInterceptor
+│   └── services/               # AuthService
+├── assets/
+└── environments/
+```
+
+---
+
+## ⚠️ Observações
+
+
+- A interface é responsiva e otimizada para desktop inicialmente.
+
+---
+
+## 📦 Build para Produção
 
 ```bash
-ng generate component component-name
+ng build --configuration production
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 📈 Diferenciais Técnicos
 
-## Building
+- Estrutura modular, com separação clara por responsabilidades
+- Utilização de Lazy Loading (`AdminModule`)
+- Componentes reusáveis e estilizados com Angular Material
+- Interface amigável e moderna com feedback visual via Snackbar
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 👤 Autor
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Desenvolvido por [Fekler](https://github.com/fekler)
