@@ -45,7 +45,7 @@ function decodeToken(token: string): any {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  hidePassword = true;
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
@@ -109,5 +109,8 @@ export class LoginComponent implements OnInit {
           }
         });
     }
+  }
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 }
