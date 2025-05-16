@@ -1,0 +1,68 @@
+.create-user-form {
+  max-width: 480px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Botões alinhados lado a lado */
+.buttons-container {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-start;
+  margin-top: 16px;
+}
+
+/* Botão Criar Usuário: cor viva e hover */
+.btn-create-user {
+  background-color: #1976d2; /* azul primário */
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+  .btn-create-user:hover:not(:disabled) {
+    background-color: #1565c0; /* azul mais escuro */
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.4);
+  }
+
+  .btn-create-user:disabled {
+    background-color: #90caf9;
+    color: #e0e0e0;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+/* Botão Voltar: leve destaque e hover */
+.btn-back {
+  color: #555;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+  .btn-back:hover {
+    color: #1976d2;
+    cursor: pointer;
+  }
+
+/* Mensagem de erro */
+.error-message {
+  color: #d32f2f; /* vermelho erro */
+  font-weight: 600;
+  margin-top: 12px;
+  text-align: center;
+}
+.mat-mdc-option.mdc-list-item {
+  background-color: white !important;
+  color: #222 !important;
+}
+
+  .mat-mdc-option.mdc-list-item:hover,
+  .mat-mdc-option.mdc-list-item.mdc-list-item--activated {
+    background-color: #e0e0e0 !important;
+    color: #000 !important;
+  }
