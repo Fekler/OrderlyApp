@@ -1,0 +1,73 @@
+name: Deploy Angular Frontend
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_NAME: ghcr.io/fekler/sales-order-management/frontend:latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Login no GHCR
+        run: docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GHCR_TOKEN }}
+
+      - name: Build da imagem Docker Angular
+        run: docker build -t ${{ env.IMAGE_NAME }} .
+
+      - name: Push da imagem para GHCR
+        run: docker push ${{ env.IMAGE_NAME }}
+
+  deploy-to-server:
+    needs: build-and-publish
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    env:
+      IMAGE_NAME: ghcr.io/fekler/sales-order-management/frontend:latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar SSH
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy para a VM via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} << EOF
+            echo "Iniciando deploy Angular..."
+            
+            echo "Criando pasta de aplicação..."
+            mkdir -p /var/app/salesordermanagement
+            cd /var/app/salesordermanagement
+
+            echo "Autenticando no GHCR..."
+            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GHCR_TOKEN }}
+
+            echo "Parando container antigo se existir..."
+            docker stop salesordermanagement-app || true
+            docker rm salesordermanagement-app || true
+
+            echo "Baixando imagem mais recente..."
+            docker pull ${{ env.IMAGE_NAME }}
+
+            echo "Subindo novo container..."
+            docker run -d \
+              --name salesordermanagement-app \
+              --restart unless-stopped \
+              -p 9001:80 \
+              ${{ env.IMAGE_NAME }}
+
+            echo "Deploy concluído com sucesso!"
+          EOF
