@@ -7,7 +7,10 @@ body {
   background-color: #f4f4f4; /* Cor de fundo geral */
   color: #333; /* Cor do texto padrão */
 }
-
+.main-wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
 
 h2 {
   color: #3f51b5; /* Cor primária do Angular Material */

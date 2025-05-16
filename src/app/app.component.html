@@ -1,19 +1,27 @@
-<mat-toolbar *ngIf="showHeader" color="primary" class="app-header">
-    <div class="app-header-left">
-        <a *ngIf="shouldShowDashboard()" mat-button routerLink="/dashboard">Dashboard</a>
-        <a *ngIf="shouldShowUsuarios()" mat-button routerLink="/admin/users">Usuários</a>
-        <a *ngIf="shouldShowProdutos()" mat-button routerLink="/stock">Produtos</a>
-        <a *ngIf="shouldShowPedidos()" mat-button [routerLink]="getOrderLink()">Pedidos</a>
-    </div>
+<ng-container *ngIf="showHeader; else loginLayout">
+    <mat-toolbar color="primary" class="app-header">
+        <div class="app-header-left">
+            <a *ngIf="shouldShowDashboard()" mat-button routerLink="/dashboard">Dashboard</a>
+            <a *ngIf="shouldShowUsuarios()" mat-button routerLink="/admin/users">Usuários</a>
+            <a *ngIf="shouldShowProdutos()" mat-button routerLink="/stock">Produtos</a>
+            <a *ngIf="shouldShowPedidos()" mat-button [routerLink]="getOrderLink()">Pedidos</a>
+        </div>
 
-    <div class="app-header-right">
-        <span *ngIf="loggedInUserName" class="user-info">
-            Olá, {{ loggedInUserName }} ({{ loggedInUserRole }})
-        </span>
-        <button mat-button color="warn" (click)="logout()">Sair</button>
-    </div>
-</mat-toolbar>
+        <div class="app-header-right">
+            <span *ngIf="loggedInUserName" class="user-info">
+                Olá, {{ loggedInUserName }} ({{ loggedInUserRole }})
+            </span>
+            <button mat-button color="warn" (click)="logout()">Sair</button>
+        </div>
+    </mat-toolbar>
 
-<main class="app-content" [ngClass]="{ 'with-header': showHeader }">
+    <main class="app-content with-header">
+        <div class="main-wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</ng-container>
+
+<ng-template #loginLayout>
     <router-outlet></router-outlet>
-</main>
+</ng-template>
