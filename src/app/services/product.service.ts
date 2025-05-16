@@ -23,12 +23,12 @@ export class ProductService {
     return this.http.get(url, { headers });
   }
 
-  getProducts(): Observable<any> {
+  getProducts(): Observable<ApiResponse<ProductDto[]>> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get(this.apiUrl, { headers });
+    return this.http.get<ApiResponse<ProductDto[]>>(this.apiUrl, { headers });
   }
 
   updateProduct(uuid: string, product: UpdateProductDto): Observable<any> {

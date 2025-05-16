@@ -8,16 +8,6 @@ body {
   color: #333; /* Cor do texto padrão */
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.app-content {
-  flex-grow: 1;
-  padding: 20px;
-}
 
 h2 {
   color: #3f51b5; /* Cor primária do Angular Material */
@@ -75,69 +65,11 @@ h2 {
 }
 
 /* Estilos para formulários Angular Material */
-form {
+/*form {
   display: flex;
   flex-direction: column;
   gap: 15px;
   margin-top: 20px;
 }
 
-.mat-form-field {
-  width: 100%; /* Ocupar a largura total do container pai */
-}
-
-  .mat-form-field.ng-invalid.ng-touched .mat-form-field-label {
-    color: #f44336; /* Cor do label em caso de erro */
-  }
-
-  .mat-form-field.ng-invalid.ng-touched .mat-input-element {
-    border-bottom-color: #f44336;
-  }
-
-.mat-error {
-  font-size: 0.8em;
-}
-
-/* Estilos específicos para checkbox */
-mat-checkbox {
-  margin-top: 10px;
-}
-
-/* Estilos para a seção de botões do formulário */
-form > div {
-  margin-top: 15px;
-}
-/* Estilos reutilizáveis para listas */
-.styled-list-container {
-  background-color: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.styled-list-title {
-  color: #3f51b5;
-  margin-top: 0;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
-}
-
-.styled-list {
-  list-style: none;
-  padding: 0;
-}
-
-.styled-list-item {
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-}
-
-  .styled-list-item:last-child {
-    border-bottom: none;
-  }
-
-.styled-list-item-content {
-  /* Pode adicionar estilos específicos para o conteúdo de cada item, se necessário */
-}
+*/

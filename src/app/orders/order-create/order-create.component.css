@@ -1,0 +1,162 @@
+.order-create-container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+.order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.order-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.order-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.unit-price {
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quantity-field {
+  width: 100px;
+}
+
+button[mat-icon-button] {
+  align-self: flex-start;
+  margin-top: 20px;
+}
+
+button {
+  margin-top: 8px;
+}
+/* Garante que o texto do mat-select seja legível */
+.mat-select-trigger {
+  color: #222; /* texto escuro para contraste */
+  font-size: 16px;
+}
+
+/* Ajusta padding do texto dentro do mat-select */
+.mat-select-value-text {
+  padding-left: 8px;
+}
+
+/* Cor de fundo e texto das opções */
+.mat-select-panel {
+  background-color: #fff !important; /* fundo branco */
+  color: #222 !important; /* texto escuro */
+}
+
+/* As opções dentro do dropdown */
+.mat-option {
+  color: #222;
+  font-size: 16px;
+}
+
+  /* Opção desabilitada com opacidade reduzida para entender que está desabilitada */
+  .mat-option.mat-option-disabled {
+    opacity: 0.5;
+  }
+
+  /* Aumenta o tamanho da fonte e o padding dos itens */
+  .mat-option .mat-option-text {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+:host ::ng-deep .mat-select-trigger {
+  color: #222 !important;
+  font-size: 16px;
+}
+
+:host ::ng-deep .mat-select-panel {
+  background: #fff !important;
+  color: #222 !important;
+}
+
+:host ::ng-deep .mat-option {
+  color: #222 !important;
+  font-size: 16px;
+}
+
+  :host ::ng-deep .mat-option.mat-option-disabled {
+    opacity: 0.5;
+  }
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.mat-mdc-option.mdc-list-item {
+  background-color: white !important;
+  color: #222 !important;
+}
+
+  .mat-mdc-option.mdc-list-item:hover,
+  .mat-mdc-option.mdc-list-item.mdc-list-item--activated {
+    background-color: #e0e0e0 !important;
+    color: #000 !important;
+  }
+/* Botão Criar Pedido */
+button[type="submit"] {
+  background-color: #1976d2; /* Azul vivo padrão do Angular Material */
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(25, 118, 210, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 6px;
+  padding: 10px 24px;
+}
+
+  button[type="submit"]:hover:not(:disabled) {
+    background-color: #1565c0; /* Azul mais escuro ao passar o mouse */
+    box-shadow: 0 5px 12px rgba(21, 101, 192, 0.6);
+  }
+
+  button[type="submit"]:disabled {
+    background-color: #90caf9; /* Azul clarinho para indicar desabilitado */
+    color: #eee;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+/* Botão Voltar */
+button[type="button"] {
+  background-color: transparent;
+  color: #1976d2;
+  font-weight: 600;
+  border: 2px solid transparent;
+  padding: 10px 24px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+}
+
+  button[type="button"]:hover {
+    background-color: #e3f2fd; /* Azul clarinho de fundo */
+    color: #0d47a1; /* Azul mais escuro */
+    border-color: #1976d2;
+  }
+
+/* Espaçamento entre botões */
+button[type="submit"], button[type="button"] {
+  margin-right: 12px;
+}

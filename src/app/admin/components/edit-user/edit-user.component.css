@@ -1,40 +1,65 @@
-/* Estilos específicos para o EditUserComponent */
-form {
-  max-width: 600px; /* Limita a largura do formulário */
-  margin: 20px auto; /* Centraliza o formulário na página */
-  padding: 20px;
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.edit-user-form {
+  max-width: 480px;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
 }
 
-.mat-form-field {
-  width: 100%;
-}
+  .edit-user-form mat-form-field {
+    width: 100%;
+  }
 
-.mat-checkbox {
-  margin-top: 10px;
-}
+  .edit-user-form .buttons-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    justify-content: flex-start;
+  }
 
-form > div { /* Estilos para a div dos botões */
-  margin-top: 20px;
-  display: flex;
-  gap: 10px; /* Espaçamento entre os botões */
-  justify-content: flex-start; /* Alinha os botões à esquerda */
-}
+  .edit-user-form button[mat-raised-button] {
+    background-color: #1976d2;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
 
-button.mat-raised-button.mat-primary {
-  /* Os estilos para este botão já estão definidos no CSS global */
-}
+    .edit-user-form button[mat-raised-button]:hover:not(:disabled) {
+      background-color: #1565c0;
+      box-shadow: 0 4px 12px rgba(21, 101, 192, 0.4);
+    }
 
-button.mat-button {
-  /* Os estilos para este botão já estão definidos no CSS global */
-}
+    .edit-user-form button[mat-raised-button]:disabled {
+      background-color: #90caf9;
+      color: #e0e0e0;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+  .edit-user-form button[mat-button] {
+    color: #555;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+    .edit-user-form button[mat-button]:hover {
+      color: #1976d2;
+      cursor: pointer;
+    }
 
 .error-message {
-  /* Os estilos para esta classe já estão definidos no CSS global */
-  margin-top: 20px; /* Adiciona mais espaço acima da mensagem de erro no formulário */
+  color: #d32f2f;
+  font-weight: 600;
+  margin-top: 12px;
+  text-align: center;
 }
+
+.mat-mdc-option.mdc-list-item {
+  background-color: white !important;
+  color: #222 !important;
+}
+
+  .mat-mdc-option.mdc-list-item:hover,
+  .mat-mdc-option.mdc-list-item.mdc-list-item--activated {
+    background-color: #e0e0e0 !important;
+    color: #000 !important;
+  }

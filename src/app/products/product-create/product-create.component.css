@@ -1,0 +1,73 @@
+.product-form {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.product-form {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+  .product-form mat-form-field {
+    width: 100%;
+  }
+
+  .product-form .buttons-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    justify-content: flex-start;
+  }
+
+  /* Botões Raised (Cadastrar / Atualizar e Excluir) */
+  .product-form button[mat-raised-button] {
+    background-color: #1976d2; /* azul primário */
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+
+    /* Hover do botão principal */
+    .product-form button[mat-raised-button]:hover:not(:disabled) {
+      background-color: #1565c0; /* azul mais escuro */
+      box-shadow: 0 4px 12px rgba(21, 101, 192, 0.4);
+    }
+
+    /* Disabled botão principal */
+    .product-form button[mat-raised-button]:disabled {
+      background-color: #90caf9;
+      color: #e0e0e0;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* Botão excluir - sobrescreve a cor padrão para vermelho */
+    .product-form button[mat-raised-button][color="warn"] {
+      background-color: #d32f2f;
+    }
+
+      .product-form button[mat-raised-button][color="warn"]:hover:not(:disabled) {
+        background-color: #b71c1c;
+        box-shadow: 0 4px 12px rgba(183, 28, 28, 0.4);
+      }
+
+  /* Botão voltar - estilo texto */
+  .product-form button[mat-button] {
+    color: #555;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+    .product-form button[mat-button]:hover {
+      color: #1976d2;
+      cursor: pointer;
+    }

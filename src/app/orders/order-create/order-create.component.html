@@ -5,89 +5,90 @@
         <p>Carregando produtos...</p>
     </div>
 
-    <form *ngIf="!isLoading" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-        <div>
-            <label for="shippingAddress">Endereço de Entrega:</label>
-            <input type="text" id="shippingAddress" formControlName="shippingAddress" required>
-            <div *ngIf="orderForm.controls['shippingAddress'].invalid && (orderForm.controls['shippingAddress'].dirty || orderForm.controls['shippingAddress'].touched)">
-                <div *ngIf="orderForm.controls['shippingAddress'].errors?.['required']">Endereço de entrega é obrigatório.</div>
-                <div *ngIf="orderForm.controls['shippingAddress'].errors?.['maxlength']">O endereço não pode exceder 255 caracteres.</div>
-            </div>
-        </div>
+    <form *ngIf="!isLoading" [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="order-form">
 
-        <div>
-            <label for="billingAddress">Endereço de Cobrança:</label>
-            <input type="text" id="billingAddress" formControlName="billingAddress" required>
-            <div *ngIf="orderForm.controls['billingAddress'].invalid && (orderForm.controls['billingAddress'].dirty || orderForm.controls['billingAddress'].touched)">
-                <div *ngIf="orderForm.controls['billingAddress'].errors?.['required']">Endereço de cobrança é obrigatório.</div>
-                <div *ngIf="orderForm.controls['billingAddress'].errors?.['maxlength']">O endereço não pode exceder 255 caracteres.</div>
-            </div>
-        </div>
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Endereço de Entrega</mat-label>
+            <input matInput type="text" formControlName="shippingAddress" required maxlength="255" />
+            <mat-error *ngIf="orderForm.controls['shippingAddress'].hasError('required')">Endereço de entrega é obrigatório.</mat-error>
+            <mat-error *ngIf="orderForm.controls['shippingAddress'].hasError('maxlength')">O endereço não pode exceder 255 caracteres.</mat-error>
+        </mat-form-field>
 
-        <div>
-            <label for="paymentMethod">Método de Pagamento:</label>
-            <select id="paymentMethod" formControlName="paymentMethod" required>
-                <option value="" disabled>Selecione o método de pagamento</option>
-                <option value="CreditCard">Cartão de Crédito</option>
-                <option value="DebitCard">Cartão de Débito</option>
-                <option value="Cash">Dinheiro</option>
-                <option value="Pix">Pix</option>
-            </select>
-            <div *ngIf="orderForm.controls['paymentMethod'].invalid && (orderForm.controls['paymentMethod'].dirty || orderForm.controls['paymentMethod'].touched)">
-                <div *ngIf="orderForm.controls['paymentMethod'].errors?.['required']">O método de pagamento é obrigatório.</div>
-            </div>
-        </div>
-        <div>
-            <h3>Total (Estimado): {{ totalAmount | currency:'BRL' }}</h3>
-        </div>
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Endereço de Cobrança</mat-label>
+            <input matInput type="text" formControlName="billingAddress" required maxlength="255" />
+            <mat-error *ngIf="orderForm.controls['billingAddress'].hasError('required')">Endereço de cobrança é obrigatório.</mat-error>
+            <mat-error *ngIf="orderForm.controls['billingAddress'].hasError('maxlength')">O endereço não pode exceder 255 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Método de Pagamento</mat-label>
+            <mat-select formControlName="paymentMethod" required>
+                <mat-option value="" disabled>Selecione o método de pagamento</mat-option>
+                <mat-option value="CreditCard">Cartão de Crédito</mat-option>
+                <mat-option value="DebitCard">Cartão de Débito</mat-option>
+                <mat-option value="Cash">Dinheiro</mat-option>
+                <mat-option value="Pix">Pix</mat-option>
+            </mat-select>
+            <mat-error *ngIf="orderForm.controls['paymentMethod'].invalid && (orderForm.controls['paymentMethod'].dirty || orderForm.controls['paymentMethod'].touched)">
+                O método de pagamento é obrigatório.
+            </mat-error>
+        </mat-form-field>
+        <h3>Total (Estimado): {{ totalAmount | currency:'BRL' }}</h3>
 
         <h3>Itens do Pedido:</h3>
-        <div formArrayName="orderItems">
-            <div *ngFor="let i of orderItems.controls; let index = index" [formGroupName]="index">
-                <div>
-                    <label for="productId_{{index}}">Produto:</label>
-                    <select id="productId_{{index}}" formControlName="productId" required>
-                        <option value="" disabled>Selecione um produto</option>
-                        <option *ngFor="let product of products"
-                                [value]="product.uuid"
-                                [disabled]="isProductSelectedElsewhere(product.uuid, index)"> {{ product.name }} (Estoque: {{product.quantity}}) </option>
-                    </select>
-                    <div *ngIf="i.get('productId')?.invalid && (i.get('productId')?.dirty || i.get('productId')?.touched)">
+        <div formArrayName="orderItems" class="order-items-container">
+            <div *ngFor="let i of orderItems.controls; let index = index" [formGroupName]="index" class="order-item">
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Produto</mat-label>
+                    <mat-select formControlName="productId" required>
+                        <mat-option value="" disabled>Selecione um produto</mat-option>
+                        <mat-option *ngFor="let product of products"
+                                    [value]="product.uuid"
+                                    [disabled]="isProductSelectedElsewhere(product.uuid, index)">
+                            {{ product.name }} (Estoque: {{product.quantity}})
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="i.get('productId')?.invalid && (i.get('productId')?.dirty || i.get('productId')?.touched)">
                         <div *ngIf="i.get('productId')?.errors?.['required']">O produto é obrigatório.</div>
                         <div *ngIf="i.get('productId')?.errors?.['duplicateProduct']" style="color: red;">
                             Este produto já foi adicionado ao pedido.
                         </div>
-                    </div>
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="unit-price">
+                    <label>Preço Unitário:</label>
+                    <span>{{ getUnitPrice(i.get('productId')?.value) | currency:'BRL' }}</span>
                 </div>
 
-                <div>
-                    <label>Preço Unitário:</label>
-                    <span>Valor unitário: {{ getUnitPrice(i.get('productId')?.value) | currency:'BRL' }}</span>
-<!--                     <span>Valor total do item: {{ getItemTotal(i) | currency:'BRL' }}</span>
- -->                </div>
-
-                <div>
-                    <label for="quantity_{{index}}">Quantidade:</label>
-                    <input type="number"
-                           id="quantity_{{index}}"
+                <mat-form-field appearance="fill" class="quantity-field">
+                    <mat-label>Quantidade</mat-label>
+                    <input matInput type="number"
                            formControlName="quantity"
                            min="1"
-                           [max]="getProductStock(i.get('productId')?.value) ?? 9999" required
-                           (input)="calculateTotalAmount()"> <div *ngIf="i.get('quantity')?.invalid && (i.get('quantity')?.dirty || i.get('quantity')?.touched)">
-                        <div *ngIf="i.get('quantity')?.errors?.['required']">A quantidade é obrigatória.</div>
-                        <div *ngIf="i.get('quantity')?.errors?.['min']">A quantidade deve ser maior que zero.</div>
-                        <div *ngIf="i.get('quantity')?.errors?.['maxStockExceeded']" style="color: red;">
-                            Quantidade excede o estoque disponível (Máx: {{ i.get('quantity')?.errors?.['maxStockExceeded'].requiredMax }}).
-                        </div>
-                    </div>
-                </div>
+                           [max]="getProductStock(i.get('productId')?.value) ?? 9999"
+                           required
+                           (input)="calculateTotalAmount()" />
+                    <mat-error *ngIf="i.get('quantity')?.hasError('required')">A quantidade é obrigatória.</mat-error>
+                    <mat-error *ngIf="i.get('quantity')?.hasError('min')">A quantidade deve ser maior que zero.</mat-error>
+                    <mat-error *ngIf="i.get('quantity')?.hasError('maxStockExceeded')" style="color: red;">
+                        Quantidade excede o estoque disponível (Máx: {{ i.get('quantity')?.errors?.['maxStockExceeded'].requiredMax }}).
+                    </mat-error>
+                </mat-form-field>
 
-                <button type="button" (click)="removeOrderItem(index)">Remover Item</button>
+                <button mat-icon-button color="warn" type="button" aria-label="Remover item" (click)="removeOrderItem(index)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
             </div>
         </div>
-        <button type="button" (click)="addOrderItem()">Adicionar Item</button>
-        <br>
-        <button type="submit" [disabled]="orderForm.invalid">Criar Pedido</button>
-        <button type="button" (click)="goBack()">Voltar</button>
+
+        <button mat-stroked-button type="button" (click)="addOrderItem()">Adicionar Item</button>
+        <br><br>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="orderForm.invalid">Criar Pedido</button>
+        <button mat-button type="button" (click)="goBack()">Voltar</button>
     </form>
 </div>

@@ -13,7 +13,8 @@ import { createUniqueProductValidator, createMaxStockValidator } from '../../val
   selector: 'app-order-create',
   standalone: false,
   templateUrl: './order-create.component.html',
-  styleUrl: './order-create.component.css'
+  styleUrl: './order-create.component.css',
+
 })
 export class OrderCreateComponent implements OnInit {
   orderForm: FormGroup;

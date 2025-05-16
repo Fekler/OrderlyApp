@@ -31,7 +31,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip'; 
-
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -66,7 +66,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSelectModule,
     MatTableModule,
     MatCheckboxModule,
-    MatTooltipModule 
+    MatTooltipModule,
+    MatToolbarModule
 
 
   ],

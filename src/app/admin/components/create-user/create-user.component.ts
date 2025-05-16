@@ -17,7 +17,7 @@ export class CreateUserComponent {
   errorMessage: string = '';
   //userRoles = Object.values(UserRole).filter(value => typeof value === 'string');
   userRoles: { name: string; value: UserRole }[] = Object.keys(UserRole)
-    .filter((key) => isNaN(Number(key))) // Filtra as chaves que não são números (índices reversos)
+    .filter((key) => isNaN(Number(key))) 
     .map((key) => ({
       name: key,
       value: UserRole[key as keyof typeof UserRole]

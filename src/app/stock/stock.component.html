@@ -5,37 +5,50 @@
     Carregando produtos...
 </div>
 
-<div *ngIf="errorMessage" style="color: red;">
+<div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
 </div>
 
-<table *ngIf="products.length > 0">
-    <thead>
-        <tr>
-            <th *ngIf="showUuidColumn">UUID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-            <th>Quantidade</th>
-            <th>Categoria</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let product of products">
-            <td *ngIf="showUuidColumn">{{ product.uuid }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description }}</td>
-            <td>{{ product.price }}</td>
-            <td>{{ product.quantity }}</td>
-            <td>{{ product.category }}</td>
-            <td>
-                <button mat-icon-button color="primary" (click)="goToEditProduct(product.uuid)" matTooltip="Editar">
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </td>
-        </tr>
-    </tbody>
+<table mat-table [dataSource]="products" class="mat-elevation-z8" *ngIf="products.length > 0">
+    <ng-container *ngIf="showUuidColumn" matColumnDef="uuid">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let product">{{ product.uuid }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let product">{{ product.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Descrição</th>
+        <td mat-cell *matCellDef="let product">{{ product.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Preço</th>
+        <td mat-cell *matCellDef="let product">{{ product.price }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+        <td mat-cell *matCellDef="let product">{{ product.quantity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>Categoria</th>
+        <td mat-cell *matCellDef="let product">{{ product.category }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let product">
+            <button mat-button color="primary" (click)="goToEditProduct(product.uuid)">Editar </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
 <div *ngIf="!isLoading && products.length === 0 && !errorMessage">

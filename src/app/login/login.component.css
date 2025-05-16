@@ -1,0 +1,73 @@
+/* Centralizar o card na tela */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* tela cheia vertical */
+  background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Card com sombra, borda arredondada e largura limitada */
+mat-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+/* Título do card */
+mat-card-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1976d2;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Formulário e campos */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Inputs do Material */
+mat-form-field {
+  width: 100%;
+}
+  mat-form-field input.mat-input-element {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+/* Botão de login */
+button[mat-raised-button] {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 3px 8px rgba(25, 118, 210, 0.4);
+  transition: background-color 0.3s ease;
+}
+
+  button[mat-raised-button]:hover:not(:disabled) {
+    background-color: #1565c0;
+  }
+
+/* Mensagens de erro */
+mat-error {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #d32f2f;
+}
+
+/* Desabilitado */
+button[mat-raised-button]:disabled {
+  background-color: #90caf9;
+  color: #e3f2fd;
+  box-shadow: none;
+  cursor: not-allowed;
+}
