@@ -2,6 +2,10 @@
 
 Frontend da aplicação **Sales Order Management**, desenvolvido em **Angular 19+** com **Angular Material**. Este projeto oferece uma interface moderna, segura e responsiva para clientes, vendedores e administradores gerenciarem pedidos e produtos de forma eficiente.
 
+Link da aplicação:
+
+**🔗 https://sales.fekler.tec.br/** 
+
 ---
 
 ## 🚀 Funcionalidades Principais
