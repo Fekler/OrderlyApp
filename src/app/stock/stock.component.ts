@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Router } from '@angular/router';
+import { ProductDto, CreateProductDto, UpdateProductDto } from '../interfaces/product.interface'; 
+import { ApiResponse } from '../interfaces/api-response.interface';
 
 @Component({
   selector: 'app-stock',
   standalone: false,
   templateUrl: './stock.component.html',
-  styleUrl: './stock.component.css'
+  styleUrls: ['./stock.component.css']
 })
 export class StockComponent implements OnInit {
-  products: any[] = [];
+  products: ProductDto[] = [];
   errorMessage: string = '';
   isLoading: boolean = true;
   showUuidColumn: boolean = false;
+  displayedColumns: string[] = [];
 
   constructor(private productService: ProductService, private router: Router) { }
 
@@ -23,16 +26,30 @@ export class StockComponent implements OnInit {
   loadProducts(): void {
     this.isLoading = true;
     this.productService.getProducts().subscribe({
-      next: (data) => {
-        this.products = data.data; 
+      next: (response) => {
+        if (response.success && response.data) {
+          this.products = response.data;
+          this.displayedColumns = this.getDisplayedColumns(); // Defina as colunas após carregar os dados
+        } else {
+          this.errorMessage = response.message || 'Erro ao carregar produtos.';
+        }
         this.isLoading = false;
       },
       error: (error) => {
-        this.errorMessage = 'Erro ao carregar os produtos.';
-        console.error('Erro ao carregar os produtos:', error);
+        this.errorMessage = 'Erro ao carregar produtos.';
+        console.error('Erro:', error);
         this.isLoading = false;
       }
     });
+  }
+
+  getDisplayedColumns(): string[] {
+    const columns = [];
+    if (this.showUuidColumn) {
+      columns.push('uuid');
+    }
+    columns.push('name', 'description', 'price', 'quantity', 'category', 'actions');
+    return columns;
   }
   goToEditProduct(uuid: string): void {
     this.router.navigate(['/products', uuid, 'edit']);
