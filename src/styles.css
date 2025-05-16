@@ -8,16 +8,6 @@ body {
   color: #333; /* Cor do texto padrão */
 }
 
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.app-content {
-  flex-grow: 1;
-  padding: 20px;
-}
 
 h2 {
   color: #3f51b5; /* Cor primária do Angular Material */

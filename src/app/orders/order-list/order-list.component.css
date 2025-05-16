@@ -169,14 +169,13 @@ button.expand-toggle {
   }
 .action-buttons {
   display: flex;
-  gap: 5px /* espaço entre os botões */
   align-items: center;
 }
 
   /* Se quiser botões mais bonitos */
   .action-buttons button {
     min-width: 90px;
-    padding: 0.2rem 0.rem;
+    padding: 0.2rem 0.1rem;
     border-radius: 4px;
     font-weight: 500;
   }

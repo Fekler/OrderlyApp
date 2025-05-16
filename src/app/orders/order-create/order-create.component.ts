@@ -8,14 +8,12 @@ import { CreateOrderDto, CreateOrderItemDto } from '../../interfaces/order.inter
 import { JwtDecoder } from '../../utils/jwt-decoder';
 import { ProductService } from '../../services/product.service';
 import { createUniqueProductValidator, createMaxStockValidator } from '../../validators/product.validator'; // Exemplo de caminho
-import {  ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-order-create',
   standalone: false,
   templateUrl: './order-create.component.html',
   styleUrl: './order-create.component.css',
-  encapsulation: ViewEncapsulation.None
 
 })
 export class OrderCreateComponent implements OnInit {
