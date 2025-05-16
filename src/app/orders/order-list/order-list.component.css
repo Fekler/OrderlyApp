@@ -1,4 +1,4 @@
-.error-message {
+/*.error-message {
   color: red;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -24,11 +24,83 @@ button {
 }
 
   .client-orders-container h2 {
-    margin-bottom: 20px; /* Espaço abaixo do título */
-  }
+    margin-bottom: 20px;*/ /* Espaço abaixo do título */
+  /*}
 
   .client-orders-container button {
-    margin-right: 10px; /* Espaço entre os botões */
-  }
+    margin-right: 10px;*/ /* Espaço entre os botões */
+  /*}*/
 
 /* ... outros estilos ... */
+/* Estilos específicos para o OrderListComponent */
+.orders-container {
+  padding: 20px;
+}
+
+  .orders-container h2 {
+    margin-bottom: 20px;
+  }
+
+  .orders-container button.mat-raised-button.mat-primary {
+    margin-bottom: 20px;
+  }
+
+  .orders-container .error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .orders-container .mat-elevation-z8 {
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: 0 8px 16px -8px rgba(0, 0, 0, .2);
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .orders-container .mat-table {
+    width: 100%;
+  }
+
+  .orders-container .mat-header-cell {
+    font-weight: bold;
+    color: #3f51b5;
+  }
+
+  .orders-container .mat-cell {
+    border-bottom: 1px solid #ddd;
+  }
+
+  .orders-container .mat-row:last-child .mat-cell {
+    border-bottom: none;
+  }
+
+  .orders-container button {
+    margin-right: 0.5rem;
+  }
+
+  .orders-container .detail-row {
+    height: 0;
+  }
+
+    .orders-container .detail-row td {
+      border-bottom-width: 0;
+    }
+
+  .orders-container .order-details {
+    background: #f4f4f4;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+  }
+
+    .orders-container .order-details ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .orders-container .order-details li {
+      margin-bottom: 5px;
+    }
