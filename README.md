@@ -1,10 +1,10 @@
-# 🛍️ Sales Order Management - Frontend
+# 🛍️ Orderly - Frontend
 
-Frontend da aplicação **Sales Order Management**, desenvolvido em **Angular 19+** com **Angular Material**. Este projeto oferece uma interface moderna, segura e responsiva para clientes, vendedores e administradores gerenciarem pedidos e produtos de forma eficiente.
+Frontend da aplicação **Orderly**, desenvolvido em **Angular 19+** com **Angular Material**. Este projeto oferece uma interface moderna, segura e responsiva para clientes, vendedores e administradores gerenciarem pedidos e produtos de forma eficiente.
 
 Link da aplicação:
 
-**🔗 https://sales.fekler.tec.br/** 
+**🔗 https://orderly.fekler.tec.br/** 
 
 ---
 
@@ -156,6 +156,15 @@ ng build --configuration production
 - Utilização de Lazy Loading (`AdminModule`)
 - Componentes reusáveis e estilizados com Angular Material
 - Interface amigável e moderna com feedback visual via Snackbar
+
+---
+
+## BACKEND
+
+Abaixo Segue o link do repositório e documentação do BackEnd(API) em .NET e C#
+
+
+**🔗 [Link da API](https://github.com/Fekler/OrderlyAPI)** 
 
 ---
 
