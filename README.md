@@ -63,7 +63,7 @@ Link da aplicação:
 A aplicação se comunica com a API hospedada em:
 
 ```
-https://sales-dev-api.fekler.tec.br
+https://orderly-api.fekler.tec.br
 ```
 
 Configurado via:
